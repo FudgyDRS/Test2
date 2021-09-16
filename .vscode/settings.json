@@ -1,0 +1,5 @@
+{
+  "files.insertFinalNewline": true,
+  "atlascode.jira.enabled": false,
+  "atlascode.bitbucket.enabled": false
+}
