@@ -19,13 +19,13 @@ const Nav = styled.div`
   justify-content: flex-start;
   align-items: center;
   height: 5rem;
-  background-color: black;
+  background-color: #141b25;
 `;
 
 const SidebarNav = styled.div<{ sidebar: boolean }>`
     width: 250px;
     height: 100vh;
-    background-color: black;
+    background-color: #141b25;
     position: fixed;
     top 0;
     left: ${({ sidebar }) => (sidebar ? "0" : "-100%")};
@@ -45,7 +45,7 @@ const ConnectButtonBox = styled.div`
   justify-content: flex-end;
   align-items: center;
   height: 5rem;
-  background-color: black;
+  background-color: #141b25;
   padding-right: 2rem;
 `;
 
@@ -55,7 +55,7 @@ const Header = styled.div`
   align-items: center;
   direction: row;
   height: 5rem;
-  background-color: black;
+  background-color: #141b25;
 `;
 
 const SidebarWrap = styled.div``;

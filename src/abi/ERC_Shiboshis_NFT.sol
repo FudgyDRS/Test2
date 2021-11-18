@@ -2,6 +2,12 @@
 
 pragma solidity ^0.7.0;
 
+// Code:    https://etherscan.io/address/0x11450058d796b02eb53e65374be59cff65d3fe7f#code
+// Tx:      https://etherscan.io/tx/0xb13ce83a0d7b86650fa81766cb33a4a731ccef8f21551b3bad0effdb83851bc1
+// Image:   https://shiboshis.mypinata.cloud/ipfs/QmeZ6W9SwqFncgzCC2NsAEHnnKfTfpTfxSVQDL3dFSFKGa
+// JSON:    https://shiboshis.mypinata.cloud/ipfs/QmaSwqiUwaD3nswmBcVrvejdNMYUz8vGdJo35wpaEqFuDF/990
+// OpenSea: https://opensea.io/assets/0x11450058d796b02eb53e65374be59cff65d3fe7f/990
+
 abstract contract Context {
     function _msgSender() internal view virtual returns (address payable) { return payable(msg.sender); }
     function _msgData() internal view virtual returns (bytes memory) {

@@ -5,7 +5,7 @@ import styled from "styled-components";
 import { ethers } from "ethers";
 import { formatEther, parseUnits, formatUnits } from "@ethersproject/units";
 import { BigNumber, BigNumberish } from "@ethersproject/bignumber";
-import { useEtherBalance, useTokenBalance, useEthers } from "@usedapp/core";
+import { useEtherBalance, useTokenBalance, useEthers } from "../hooks";
 
 import { GetTotalDividendsDistributed } from "../abi/KittyCake";
 import {
@@ -42,6 +42,7 @@ const ListMonsters: FC<MonsterObjectProps> = ({ monsterObject }) => {
 const Overview: FC = () => {
   const { account } = useEthers();
   const etherBalance = useEtherBalance(account);
+  console.log("Account: ", useEtherBalance(account));
 
   const TrainMonster0 = () => {
     const monster = "0x23AE";
@@ -57,7 +58,7 @@ const Overview: FC = () => {
   const tokenMeowMoon = "0x1970e6047bcbca6c78b57b6e0b1006abe629a630";
   const myBalance = useTokenBalance(tokenMeowMoon, account);
   const randoAccount = "0xd0de77a730383499ff1ac931151ac6097ac09f8c";
-  const randoBalance = useTokenBalance(tokenMeowMoon, randoAccount);
+  var randoBalance = useTokenBalance(tokenMeowMoon, randoAccount);
 
   //		KittyCake
   const tokenKittyCake = "0xc22e8114818a918260662375450e19ac73d32852";
@@ -88,6 +89,7 @@ const Overview: FC = () => {
   console.log(OwnerOf(_id));
   //console.log(testMonster)
   //console.log(cooldownBlocks);
+  console.log("RandoBalance: ", randoBalance);
 
   return (
     <>

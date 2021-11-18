@@ -1,14 +1,21 @@
 import { Button, Box, Text } from "@chakra-ui/react";
-import { useEthers, useEtherBalance } from "@usedapp/core";
+import { useEthers, useEtherBalance } from "../hooks";
 import { formatEther } from "@ethersproject/units";
 import Identicon from "../Identicon";
+
+//import { DAppProvider } from "@usedapp/core";
+//import { ChainId } from "@usedapp/core";
+
+import { DAppProvider } from "../providers";
+import { ChainId } from "../constants";
+import { NATIVE_CURRENCY } from "../constants";
 
 type Props = {
   handleOpenModal: any;
 };
 
 export default function ConnectButton({ handleOpenModal }: Props) {
-  const { activateBrowserWallet, account } = useEthers();
+  const { activateBrowserWallet, account, chainId } = useEthers();
   const etherBalance = useEtherBalance(account);
 
   function handleConnectWallet() {
@@ -19,7 +26,16 @@ export default function ConnectButton({ handleOpenModal }: Props) {
     <Box display="flex" alignItems="center" background="gray.700" borderRadius="xl" py="0">
       <Box px="3">
         <Text color="white" fontSize="md">
-          {etherBalance && parseFloat(formatEther(etherBalance)).toFixed(3)} BNB
+          {etherBalance && parseFloat(formatEther(etherBalance)).toFixed(3)}
+          {chainId == 4002
+            ? " tFTM"
+            : chainId == 250
+            ? " FTM"
+            : chainId == 97
+            ? " tBNB"
+            : chainId == 56
+            ? " BNB"
+            : " ETH"}
         </Text>
       </Box>
       <Button
