@@ -7,13 +7,13 @@ import Portfolio from "./pages/Portfolio";
 import Stake from "./pages/Stake";
 import Swap from "./pages/Swap";
 //import Configurations from "./pages/Configurations";
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import { BrowserRouter as Router, HashRouter, Route, Switch } from "react-router-dom";
 import IpfsRouter from "ipfs-react-router";
 
 const App: FC = () => {
   return (
     <>
-      <IpfsRouter>
+      <HashRouter>
         <Sidebar />
         <Switch>
           <Route path="/overview" component={Overview} exact></Route>
@@ -22,7 +22,7 @@ const App: FC = () => {
           <Route path="/stake" component={Stake} exact></Route>
           <Route path="/swap" component={Swap} exact></Route>
         </Switch>
-      </IpfsRouter>
+      </HashRouter>
     </>
   );
 };
