@@ -1,6 +1,7 @@
 {
   "name": "ts-dapp2",
-  "version": "0.1.0",
+  "homepage": "https://fudgydrs.github.io/NFT_Game/",
+  "version": "0.0.1a",
   "private": true,
   "dependencies": {
     "@chakra-ui/icons": "^1.0.15",
@@ -25,6 +26,7 @@
     "dom-factory": "^1.1.0",
     "ethers": "^5.4.7",
     "framer-motion": "^4.1.17",
+    "gh-pages": "^3.2.3",
     "ipfs-react-router": "^0.2.2",
     "material-design-kit": "^2.2.1",
     "mdbreact": "^5.1.0",
@@ -46,6 +48,8 @@
   },
   "scripts": {
     "start": "react-scripts start",
+    "predeploy": "yarn run build",
+    "deploy": "gh-pages -d build",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",

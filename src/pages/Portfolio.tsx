@@ -630,6 +630,8 @@ export default Portfolio;
 //  list current wallet
 //  button to connect to bscscan.com/address
 //  button to copy address
+//  something onscreen when nothing loads (wallet isnt connected)
+//  invalid address error(s)
 
 //  create contract
 //    tokens held buy address
