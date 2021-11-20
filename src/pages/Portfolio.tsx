@@ -583,7 +583,7 @@ const Portfolio: FC = () => {
             </Tbody>
           </Table>
           <Center>
-            <Box width="180px" background="black" hidden={true} id="isLoading">
+            <Box width="15vh" background="black" hidden={true} id="isLoading">
               <VStack spacing={10} aligh="center">
                 <Box animation={spinAnimation}>
                   <Image src={require("../asset/image/ApeLogo.png").default} boxSize="150px" />
