@@ -1,6 +1,9 @@
 import { Button, Box, Text } from "@chakra-ui/react";
-import { useEthers, useEtherBalance } from "@usedapp/core";
-import { formatEther } from "@ethersproject/units";
+import {
+  useEthers
+  //useEtherBalance
+} from "@usedapp/core";
+//import { formatEther } from "@ethersproject/units";
 
 type Props = {
   handleMintModal: any;
@@ -8,11 +11,11 @@ type Props = {
 
 export default function MintButton({ handleMintModal }: Props) {
   const { activateBrowserWallet, account } = useEthers();
-  const etherBalance = useEtherBalance(account);
+  //const etherBalance = useEtherBalance(account);
 
-  function mintNFT() {
-    // some function to mint NFTs
-  }
+  //function mintNFT() {
+  // some function to mint NFTs
+  //}
 
   function testClick() {
     console.log(activateBrowserWallet);

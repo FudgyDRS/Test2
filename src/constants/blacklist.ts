@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 export const BLACKLISTED_ADDRESSES = [
   "0x119e2ad8f0c85c6f61afdf0df69693028cdc10be",
   "0x04645027122c9f152011f128c7085449b27cb6d7",
@@ -17,27 +19,29 @@ export const BLACKLISTED_ADDRESSES = [
   "0x5ec2a778717cf1a5018c6ae3a7a2957582a92007",
   "0x0f37695b320f0b3610d31f480317bd3811940983",
   "0x58c10c8e2b80fdb5613778125ddd1c93f8cc8983",
-  "0x202ea1329665a7ed6082cc8ee30baed6fe23d81a"
+  "0x202ea1329665a7ed6082cc8ee30baed6fe23d81a",
+  "0x15012acf8a58ad3fcd9f587c7ece4f62c21f65c5"
 ];
 
-export const BlacklistId = {
-  ["0x119e2ad8f0c85c6f61afdf0df69693028cdc10be"]: "Zepe.io",
-  ["0x04645027122c9f152011f128c7085449b27cb6d7"]: "ARKR.org",
-  ["0x4e1191fa01bb4ec0dcca114a958bf5c204c285fb"]: "bonuswallet.org",
-  ["0xef27b9cb67aa93ec3494a60f1ea9380e86175b26"]: "AGMC.io",
-  ["0x585de5430f47aba099bebd21ef133272c38db7a6"]: "SAFEMOON.IS",
-  ["0x5e48c354a5da2b0a8c203518d0fc7b9c58cc9329"]: "Swap7.org",
-  ["0x17d1285bc68d9085f8e4b86fc565e452b29dc48f"]: "VeloChain.io",
-  ["0x9d89f8494694a9c9cec29c72b2aba9692fa76c47"]: "Gabe",
-  ["0x5558447b06867ffebd87dd63426d61c868c45904"]: "BNBW.IO",
-  ["0x491b25000d386cd31307580171a510d32d7e64ee"]: "FF18.io",
-  ["0xb0557906c617f0048a700758606f64b33d0c41a6"]: "Zepe.io",
-  ["0xd22202d23fe7de9e3dbe11a2a88f42f4cb9507cf"]: "Minereum BSC",
-  ["0x68d1569d1a6968f194b4d93f8d0b416c123a599f"]: "AABEK.net",
-  ["0xc33fc11b55465045b3f1684bde4c0aa5c5f40124"]: "BNBw.io",
-  ["0xb8a9704d48c3e3817cc17bc6d350b00d7caaecf6"]: "ABFIN.org",
-  ["0x5ec2a778717cf1a5018c6ae3a7a2957582a92007"]: "Stakeable",
-  ["0x0f37695b320f0b3610d31f480317bd3811940983"]: "SafeGoku",
-  ["0x58c10c8e2b80fdb5613778125ddd1c93f8cc8983"]: "Kryoss.Net",
-  ["0x202ea1329665a7ed6082cc8ee30baed6fe23d81a"]: "NestFin.Net"
-};
+export const BlacklistId = new Map([
+  ["0x119e2ad8f0c85c6f61afdf0df69693028cdc10be", "Zepe.io"],
+  ["0x04645027122c9f152011f128c7085449b27cb6d7", "ARKR.org"],
+  ["0x4e1191fa01bb4ec0dcca114a958bf5c204c285fb", "bonuswallet.org"],
+  ["0xef27b9cb67aa93ec3494a60f1ea9380e86175b26", "AGMC.io"],
+  ["0x585de5430f47aba099bebd21ef133272c38db7a6", "SAFEMOON.IS"],
+  ["0x5e48c354a5da2b0a8c203518d0fc7b9c58cc9329", "Swap7.org"],
+  ["0x17d1285bc68d9085f8e4b86fc565e452b29dc48f", "VeloChain.io"],
+  ["0x9d89f8494694a9c9cec29c72b2aba9692fa76c47", "Gabe"],
+  ["0x5558447b06867ffebd87dd63426d61c868c45904", "BNBW.IO"],
+  ["0x491b25000d386cd31307580171a510d32d7e64ee", "FF18.io"],
+  ["0xb0557906c617f0048a700758606f64b33d0c41a6", "Zepe.io"],
+  ["0xd22202d23fe7de9e3dbe11a2a88f42f4cb9507cf", "Minereum BSC"],
+  ["0x68d1569d1a6968f194b4d93f8d0b416c123a599f", "AABEK.net"],
+  ["0xc33fc11b55465045b3f1684bde4c0aa5c5f40124", "BNBw.io"],
+  ["0xb8a9704d48c3e3817cc17bc6d350b00d7caaecf6", "ABFIN.org"],
+  ["0x5ec2a778717cf1a5018c6ae3a7a2957582a92007", "Stakeable"],
+  ["0x0f37695b320f0b3610d31f480317bd3811940983", "SafeGoku"],
+  ["0x58c10c8e2b80fdb5613778125ddd1c93f8cc8983", "Kryoss.Net"],
+  ["0x202ea1329665a7ed6082cc8ee30baed6fe23d81a", "NestFin.Net"],
+  ["0x15012acf8a58ad3fcd9f587c7ece4f62c21f65c5", "ABNFT.org"]
+]);

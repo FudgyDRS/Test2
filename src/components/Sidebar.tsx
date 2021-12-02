@@ -12,18 +12,17 @@ import theme from "@chakra-ui/theme";
 import ConnectButton from "./ConnectButton";
 import AccountModal from "./AccountModal";
 import "@fontsource/inter";
-import HorizontalLayout from "../layouts/HorizontalLayout";
 
 const Nav = styled.div`
   display: flex;
   justify-content: flex-start;
   align-items: center;
-  height: 5rem;
+  height: 8vh;
   background-color: #141b25;
 `;
 
 const SidebarNav = styled.div<{ sidebar: boolean }>`
-    width: 250px;
+    width: 100hw;
     height: 100vh;
     background-color: #141b25;
     position: fixed;
@@ -35,27 +34,17 @@ const NavIcon = styled(Link)`
   display: flex;
   justify-content: flex-start;
   align-items: center;
-  height: 5rem;
-  font-size: 2rem;
-  margin-left: 2rem;
-`;
-
-const ConnectButtonBox = styled.div`
-  display: flex;
-  justify-content: flex-end;
-  align-items: center;
-  height: 5rem;
-  background-color: #141b25;
-  padding-right: 2rem;
+  height: 6vh;
+  font-size: 1.25rem;
+  margin-left: 1rem;
 `;
 
 const Header = styled.div`
   display: flex;
-  gap: 80vmax;
   align-items: center;
   direction: row;
-  height: 5rem;
   background-color: #141b25;
+  justify-content: space-between;
 `;
 
 const SidebarWrap = styled.div``;
@@ -68,18 +57,16 @@ const Sidebar: FC = () => {
 
   return (
     <IconContext.Provider value={{ color: "#fff" }}>
-      <Header>
+      <Header className="headerBar">
         <Nav>
           <NavIcon to="#" onClick={showSidebar}>
             <AiOutlineMenu />
           </NavIcon>
         </Nav>
-        <ConnectButtonBox>
-          <ChakraProvider theme={theme}>
-            <ConnectButton handleOpenModal={onOpen} />
-            <AccountModal isOpen={isOpen} onClose={onClose} />
-          </ChakraProvider>
-        </ConnectButtonBox>
+        <ChakraProvider theme={theme}>
+          <ConnectButton handleOpenModal={onOpen} />
+          <AccountModal isOpen={isOpen} onClose={onClose} />
+        </ChakraProvider>
       </Header>
       <SidebarNav sidebar={sidebar}>
         <SidebarWrap>

@@ -2,12 +2,12 @@ import React from "react";
 import ReactDOM from "react-dom";
 import "./index.scss";
 import App from "./App";
-import reportWebVitals from "./reportWebVitals";
+//import reportWebVitals from "./reportWebVitals";
 
 //import { ChainId } from "@usedapp/core";
 //import { DAppProvider } from "@usedapp/core";
 
-import { ChainId } from "./constants/chainId";
+//import { ChainId } from "./constants/chainId";
 import { DAppProvider } from "./providers";
 
 import { MoralisProvider } from "react-moralis";
@@ -28,12 +28,12 @@ import Footer from "./components/Footer";
  *  Need to deploy multicall contract on BSC Testnet and FTM Mainnet
  */
 
-const config = {
-  readOnlyChainId: 56
-  //readOnlyUrls: {
-  //  [ChainId.FTM_Testnet]: "https://rpc.testnet.fantom.network/"
-  //}
-};
+//const config = {
+//  readOnlyChainId: 56
+//readOnlyUrls: {
+//  [ChainId.FTM_Testnet]: "https://rpc.testnet.fantom.network/"
+//}
+//};
 
 ReactDOM.render(
   <React.StrictMode>

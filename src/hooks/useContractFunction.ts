@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import { TransactionOptions } from "../../src";
 import { Contract } from "@ethersproject/contracts";
 import { Web3Provider } from "@ethersproject/providers";

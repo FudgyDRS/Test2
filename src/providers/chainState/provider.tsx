@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import { ReactNode, useEffect, useReducer } from "react";
 import { useDebouncePair, useEthers } from "../../hooks";
 import { useBlockNumber } from "../blockNumber/context";

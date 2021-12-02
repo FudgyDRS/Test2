@@ -1,15 +1,23 @@
-import { ERC20Interface } from "@usedapp/core/src/constants";
+//import { ERC20Interface } from "@usedapp/core/src/constants";
 import { Falsy } from "@usedapp/core/src/model/types";
-import { useContractCall, useContractFunction, useTokenBalance, useEthers } from "@usedapp/core";
+import {
+  useContractCall
+  //useContractFunction,
+  //useTokenBalance,
+  //useEthers
+} from "@usedapp/core";
 
-import KittyCakeAbi from "./KittyCake.json";
+//import KittyCakeAbi from "./KittyCake.json";
 import MoolahAbi from "./moolahAbi.json";
 import NFTAbi from "./NFTAbi.json";
 
-import { utils, ethers } from "ethers";
-import { Contract } from "@ethersproject/contracts";
+import {
+  utils
+  //ethers
+} from "ethers";
+//import { Contract } from "@ethersproject/contracts";
 
-import { BigNumber } from "@ethersproject/bignumber";
+//import { BigNumber } from "@ethersproject/bignumber";
 // import { getAddress } from '@ethersproject/address';
 
 // using my account

@@ -1,10 +1,17 @@
-import React, { FC } from "react";
-import { Box, Button, Text } from "@chakra-ui/react";
+import {
+  //React,
+  FC
+} from "react";
+//import { Box, Button, Text } from "@chakra-ui/react";
 import styled from "styled-components";
 
-import { ethers } from "ethers";
-import { formatEther, parseUnits, formatUnits } from "@ethersproject/units";
-import { BigNumber, BigNumberish } from "@ethersproject/bignumber";
+//import { ethers } from "ethers";
+import {
+  formatEther
+  //parseUnits,
+  //formatUnits
+} from "@ethersproject/units";
+//import { BigNumber, BigNumberish } from "@ethersproject/bignumber";
 
 //import { useEthers } from "@usedapp/core";
 //import { useEtherBalance } from "@usedapp/core";
@@ -12,9 +19,12 @@ import { BigNumber, BigNumberish } from "@ethersproject/bignumber";
 
 import { useEthers } from "../hooks/useEthers";
 import { useEtherBalance } from "../hooks/useEtherBalance";
-import { useTokenBalance } from "../hooks/useTokenBalance";
+//import { useTokenBalance } from "../hooks/useTokenBalance";
 
-import { ChakraProvider, useDisclosure } from "@chakra-ui/react";
+import {
+  ChakraProvider
+  //useDisclosure
+} from "@chakra-ui/react";
 import theme from "@chakra-ui/theme";
 import MintButton from "../components/MintButton";
 import "@fontsource/inter";

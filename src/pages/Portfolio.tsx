@@ -1,5 +1,5 @@
 import React, { FC, useState } from "react";
-import { Text, Box, Button, VStack, Center, keyframes, Image, Input } from "@chakra-ui/react";
+import { Button, Text, Box, VStack, Center, keyframes, Image, Input } from "@chakra-ui/react";
 import styled from "styled-components";
 
 import { Table, Thead, Tbody, Tr, Th, Td, chakra } from "@chakra-ui/react";
@@ -21,10 +21,27 @@ import { keccak256 } from "@ethersproject/keccak256";
 
 import { GridLoader } from "react-spinners";
 
-import { BLACKLISTED_ADDRESSES } from "../constants";
+import { BLACKLISTED_ADDRESSES, BlacklistId } from "../constants";
+
+import { ExternalLinkIcon, CopyIcon } from "@chakra-ui/icons";
+import { CopyToClipboard } from "react-copy-to-clipboard";
+//                           token                                        address
+// https://bscscan.com/token/0x90e1f7fb217154f92928c83607a53bc406d7398e?a=0x2b0d4289a6d2fea3de70054962fca39ad3280ffe
 
 const PortfolioDefault = styled.div`
   width: 100vw;
+  background-color: #000000;
+`;
+
+const ReloadButton = styled(Button)`
+  backgroundColor: gray.700;
+  bg: gray.700;
+  border: 1px solid transparent;
+  _hover: {{ border: "1px", borderStyle: "solid", backgroundColor: "gray.700" }};
+  borderRadius: xl;
+  m: 1px;
+  px: {3};
+  height: 28px;
 `;
 
 const spin = keyframes`
@@ -62,24 +79,24 @@ function ParseNumber(num: number): string {
   var v = String(Math.trunc(num));
   const l = v.length;
   if (l > 21) v = v.charAt(0) + "." + v.substring(1, 2) + "E" + String(l - 1);
-  else if (l == 21) v = v.substring(0, 2) + "." + v.substring(3, 5) + "QT";
-  else if (l == 20) v = v.substring(0, 1) + "." + v.substring(2, 4) + "QT";
-  else if (l == 19) v = v.charAt(0) + "." + v.substring(1, 3) + "QT";
-  else if (l == 18) v = v.substring(0, 2) + "." + v.substring(3, 5) + "Q";
-  else if (l == 17) v = v.substring(0, 1) + "." + v.substring(2, 4) + "Q";
-  else if (l == 16) v = v.charAt(0) + "." + v.substring(1, 3) + "Q";
-  else if (l == 15) v = v.substring(0, 2) + "." + v.substring(3, 5) + "T";
-  else if (l == 14) v = v.substring(0, 1) + "." + v.substring(2, 4) + "T";
-  else if (l == 13) v = v.charAt(0) + "." + v.substring(1, 3) + "T";
-  else if (l == 12) v = v.substring(0, 2) + "." + v.substring(3, 5) + "B";
-  else if (l == 11) v = v.substring(0, 1) + "." + v.substring(2, 4) + "B";
-  else if (l == 10) v = v.charAt(0) + "." + v.substring(1, 3) + "B";
-  else if (l == 9) v = v.substring(0, 2) + "." + v.substring(3, 5) + "M";
-  else if (l == 8) v = v.substring(0, 1) + "." + v.substring(2, 4) + "M";
-  else if (l == 7) v = v.charAt(0) + "." + v.substring(1, 3) + "M";
-  else if (l == 6) v = v.substring(0, 2) + "." + v.substring(3, 5) + "K";
-  else if (l == 5) v = v.substring(0, 1) + "." + v.substring(2, 4) + "K";
-  else if (l == 4) v = v.charAt(0) + "." + v.substring(1, 3) + "K";
+  else if (l === 21) v = v.substring(0, 2) + "." + v.substring(3, 5) + "QT";
+  else if (l === 20) v = v.substring(0, 1) + "." + v.substring(2, 4) + "QT";
+  else if (l === 19) v = v.charAt(0) + "." + v.substring(1, 3) + "QT";
+  else if (l === 18) v = v.substring(0, 2) + "." + v.substring(3, 5) + "Q";
+  else if (l === 17) v = v.substring(0, 1) + "." + v.substring(2, 4) + "Q";
+  else if (l === 16) v = v.charAt(0) + "." + v.substring(1, 3) + "Q";
+  else if (l === 15) v = v.substring(0, 2) + "." + v.substring(3, 5) + "T";
+  else if (l === 14) v = v.substring(0, 1) + "." + v.substring(2, 4) + "T";
+  else if (l === 13) v = v.charAt(0) + "." + v.substring(1, 3) + "T";
+  else if (l === 12) v = v.substring(0, 2) + "." + v.substring(3, 5) + "B";
+  else if (l === 11) v = v.substring(0, 1) + "." + v.substring(2, 4) + "B";
+  else if (l === 10) v = v.charAt(0) + "." + v.substring(1, 3) + "B";
+  else if (l === 9) v = v.substring(0, 2) + "." + v.substring(3, 5) + "M";
+  else if (l === 8) v = v.substring(0, 1) + "." + v.substring(2, 4) + "M";
+  else if (l === 7) v = v.charAt(0) + "." + v.substring(1, 3) + "M";
+  else if (l === 6) v = v.substring(0, 2) + "." + v.substring(3, 5) + "K";
+  else if (l === 5) v = v.substring(0, 1) + "." + v.substring(2, 4) + "K";
+  else if (l === 4) v = v.charAt(0) + "." + v.substring(1, 3) + "K";
   else v = String(num.toFixed(4));
   return v;
 }
@@ -117,17 +134,44 @@ async function ReloadData(
     serverUrl: "https://wxx9ih2bzamk.usemoralis.com:2053/server"
   });
   const WBNBPrice = await Moralis.Web3API.token.getTokenPrice({ chain: "bsc", address: WBNB });
+
   await Moralis.Web3API.account
     .getTokenBalances({ chain: "bsc", address: myAddress })
     .then((result: any) => {
       let test: tokensExisting[] = result;
       for (let token of test) {
-        if (!BLACKLISTED_ADDRESSES.includes(token.token_address))
-          ReloadScreenData(token, myAddress, signer, WBNBPrice.usdPrice);
+        if (!BLACKLISTED_ADDRESSES.includes(token.token_address)) {
+          ReloadScreenData(token, myAddress, signer, WBNBPrice.usdPrice).then((result0) => {
+            console.log(result0);
+          });
+        } else {
+          console.log(
+            "Scam blocked: ",
+            BlacklistId.get(token.token_address),
+            "\n(Note: If address was incorrectly flagged, please contact us.)"
+          );
+        }
       }
+      /*
+      ReloadScreenData({
+        token_address: WBNB,
+        name: WBNB,
+        symbol: '',
+        logo: '',
+        thumbnail: '',
+        decimals: "18"
+        balance: string;
+      }, myAddress, signer, WBNBPrice.usdPrice)*/
     });
   // deload splash loading screen
   if (loading) loading.hidden = true;
+
+  var accountValues = document.getElementsByClassName("accountValue");
+  var accountTotal = 0;
+  for (var values in accountValues) {
+    accountTotal += Number(values);
+  }
+  console.log(accountTotal);
 }
 
 async function ReloadScreenData(
@@ -144,9 +188,30 @@ async function ReloadScreenData(
 
   const accountTokens = formatUnits(token.balance, token.decimals);
 
-  var tokenData: tokenData;
+  var tokenData: tokenData = {
+    token_address: "",
+    name: "",
+    symbol: "",
+    logo: "",
+    thumbnail: "",
+    decimals: "",
+    balance: "",
+    mcap: "",
+    WBNBPrice: "",
+    accountValue: "",
+    totalSupply: "",
+    pairTokens: "",
+    pairLiquidity: ""
+  };
+  // if contract data can be called all in one promise function
+  // then return a single object
+  // needs to:
+  //  get token totalSupply
+  //  get pcsV2 getPair
+  //    using get pair contract getReserves
 
   var contractContract = new ethers.Contract(token.token_address, moolahAbi, signer);
+  //return contractContract.functions.totalSupply()
   await contractContract.functions
     .totalSupply()
     .then((result) => {
@@ -165,7 +230,7 @@ async function ReloadScreenData(
               // else                           result[1] decimals = 18 & result[0]; decimals = token.decimals
               var tokens2 = sortTokens(token.token_address, WBNB);
               let pairTokens, pairLiquidity;
-              if (tokens2[0] == WBNB) {
+              if (tokens2[0] === WBNB) {
                 pairTokens = formatUnits(result[1], token.decimals);
                 pairLiquidity = formatUnits(result[0], 18);
               } else {
@@ -183,27 +248,18 @@ async function ReloadScreenData(
                 (accountValue > Number(pairLiquidity)
                   ? (Number(accountTokens) / Number(totalSupply)) * Number(pairLiquidity)
                   : accountValue) * Number(WBNBPrice);
-
+              /*
               console.log(
-                "Token Name: ",
-                token.name,
-                "\nToken address: ",
-                token.token_address,
-                "\nMCap: ",
-                mCap,
-                "\nWBNB Price: ",
-                WBNBPrice,
-                "\nAccount Value: ",
-                accountValue,
-                "\nTotal Supply: ",
-                totalSupply,
-                "\nPair Tokens: ",
-                pairTokens,
-                "\nPair Liquidity: ",
-                pairLiquidity,
-                "\nAccount Tokens: ",
-                accountTokens
-              );
+                "Token Name: ", token.name,
+                "\nToken address: ", token.token_address,
+                "\nMCap: ", mCap,
+                "\nWBNB Price: ", WBNBPrice,
+                "\nAccount Value: ", accountValue,
+                "\nTotal Supply: ", totalSupply,
+                "\nPair Tokens: ", pairTokens,
+                "\nPair Liquidity: ", pairLiquidity,
+                "\nAccount Tokens: ", accountTokens
+              );*/
               tokenData = {
                 token_address: token.token_address,
                 name: token.name,
@@ -220,7 +276,7 @@ async function ReloadScreenData(
                 pairLiquidity: pairLiquidity
               };
 
-              if (Number(pairTokens) != 0 || Number(pairLiquidity) != 0) {
+              if (Number(pairTokens) !== 0 || Number(pairLiquidity) !== 0) {
                 var tbody = document.getElementById("table-data");
                 var tr = document.createElement(`tr`);
                 tr.className = "css-0";
@@ -263,7 +319,7 @@ async function ReloadScreenData(
                 tbody?.appendChild(tr);
 
                 var td7 = document.createElement(`td`);
-                td7.className = "css-0";
+                td7.className = "accountValue";
                 td7.textContent = "$" + ParseNumber(accountValue); //String(accountValue);
                 tr.appendChild(td7);
                 tbody?.appendChild(tr);
@@ -291,8 +347,8 @@ async function ReloadScreenData(
 //}
 // returns sorted token addresses, used to handle return values from pairs sorted in this order
 function sortTokens(tokenA: string, tokenB: string): string[2] {
-  const tokens: any[2] = tokenA != tokenB && tokenA < tokenB ? [tokenA, tokenB] : [tokenB, tokenA];
-  return tokens[0] != "0x0000000000000000000000000000000000000000" && tokens;
+  const tokens: any[2] = tokenA !== tokenB && tokenA < tokenB ? [tokenA, tokenB] : [tokenB, tokenA];
+  return tokens[0] !== "0x0000000000000000000000000000000000000000" && tokens;
 }
 
 // From: https://bscscan.com/address/0x05ff2b0db69458a0750badebc4f9e13add608c7f#code
@@ -363,7 +419,7 @@ const Portfolio: FC = () => {
   // pass table row as state....tf?
   const [dataTable, setDataTable] = useState();
 
-  var data2 = [
+  var data3 = [
     {
       col1: "Hello2",
       col2: "World",
@@ -381,6 +437,44 @@ const Portfolio: FC = () => {
       col5: "World4",
       col6: "World4",
       col7: "World4"
+    },
+    {
+      col1: "Hello6",
+      col2: "World6",
+      col3: "World2",
+      col4: "World2",
+      col5: "World2",
+      col6: "World2",
+      col7: "World2"
+    }
+  ];
+  var data2 = [
+    {
+      col1: "This",
+      col2: "is",
+      col3: "the",
+      col4: "default",
+      col5: "table",
+      col6: "for",
+      col7: "account"
+    },
+    {
+      col1: "data.",
+      col2: "Enter",
+      col3: "a",
+      col4: "valid",
+      col5: "address",
+      col6: "to",
+      col7: "compile"
+    },
+    {
+      col1: "valid",
+      col2: "address",
+      col3: "data",
+      col4: "and",
+      col5: "return",
+      col6: "accurate",
+      col7: "prices."
     }
   ];
   var data = React.useMemo(() => data2, []);
@@ -410,7 +504,7 @@ const Portfolio: FC = () => {
     []
   );
 
-  const tableInstance = useTable({ columns, data });
+  //const tableInstance = useTable({ columns, data });
   const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } = useTable(
     { columns, data },
     useSortBy
@@ -433,36 +527,6 @@ const Portfolio: FC = () => {
   const pcsV2Factory = "0xca143ce32fe78f1f7019d7d551a6402fc5350c73";
   const pcsV2FactoryContract = new ethers.Contract(pcsV2Factory, pancakeswapV2, signer);
 
-  data2 = [
-    {
-      col1: "Hello2",
-      col2: "World",
-      col3: "World",
-      col4: "World",
-      col5: "World",
-      col6: "World",
-      col7: "World"
-    },
-    {
-      col1: "Hello3",
-      col2: "World4",
-      col3: "World4",
-      col4: "World4",
-      col5: "World4",
-      col6: "World4",
-      col7: "World4"
-    },
-    {
-      col1: "Hello6",
-      col2: "World6",
-      col3: "World2",
-      col4: "World2",
-      col5: "World2",
-      col6: "World2",
-      col7: "World2"
-    }
-  ];
-
   /*
     
     contractContract.balanceOf(pairAddress).then(
@@ -482,67 +546,83 @@ const Portfolio: FC = () => {
 
   return (
     <>
-      <Box>
-        <Text color="white">Apefolio v0.0.01a</Text>
-        <Text color="red">This build of the Apefolio portfolio tool is an alpha version.</Text>
-        <br></br>
-        <Text color="white">
-          This tool fetches data directly from every relevant contract rather than parsing
-          transaction history.
-        </Text>
-        <Text color="white">Thus, making it more accurate than even BSCSCAN.com</Text>
-        <br></br>
-        <Text color="white">
-          To begin, connect ANY BSC wallet (this is used to make the EIP request), then search any
-          valid address and wait for the return results to render.
-        </Text>
-        <Text color="white">(Note1: data will also post your console log)</Text>
-        <Text color="white">
-          (Note2: blacklisted addresses are skipped, for now report scam addresses directly to us)
-        </Text>
-        <br></br>
-        <Input
-          placeholder="  target address..."
-          marginLeft="5px"
-          width="500px"
-          value={input}
-          onInput={(e) => setInput((e.target as HTMLInputElement).value)}
-        />
-        <Button
-          bg="gray.800"
-          color="red"
-          border="1px solid transparent"
-          _hover={{ border: "1px", borderStyle: "solid", backgroundColor: "gray.700" }}
-          borderRadius="xl"
-          m="1px"
-          px={3}
-          height="38px"
-          width="140px"
-          onClick={() => ReloadData(input, signer, Moralis)}
+      <PortfolioDefault>
+        <Box
+          overflowY="auto"
+          css={{
+            "&::-webkit-scrollbar": {
+              width: "4px"
+            },
+            "&::-webkit-scrollbar-track": {
+              width: "6px"
+            },
+            "&::-webkit-scrollbar-thumb": {
+              background: "#282c34"
+            }
+          }}
+          width="100hw"
+          height="87vh"
+          float="left"
         >
-          Reload Data
-        </Button>
-        <Text>Test Address0: 0x1C77905fEAfD85f7fdeD7aD5f871F93C2B11dcfF</Text>
-        <Text>Test Address1: 0x2ACE52107F0fA44af03e8b6bf75b8C2A72d69cff</Text>
-      </Box>
-      <Box
-        overflowY="auto"
-        css={{
-          "&::-webkit-scrollbar": {
-            width: "4px"
-          },
-          "&::-webkit-scrollbar-track": {
-            width: "6px"
-          },
-          "&::-webkit-scrollbar-thumb": {
-            background: "#282c34"
-          }
-        }}
-        width="100vw"
-        float="left"
-        height="calc(74vh - 80px)"
-      >
-        <PortfolioDefault>
+          <div className="full-body">
+            <div className="default-text">Apefolio v0.0.01a</div>
+            <div className="default-warning">
+              This build of the Apefolio portfolio tool is an alpha version.
+            </div>
+            <br></br>
+            <div className="default-text">
+              This tool fetches data directly from every relevant contract rather than parsing
+              transaction history.
+            </div>
+            <div className="default-text">Thus, making it more accurate than even BSCSCAN.com</div>
+            <br></br>
+            <div className="default-text">
+              To begin, connect ANY BSC wallet (this is used to make the EIP request), then search
+              any valid address and wait for the return results to render.
+            </div>
+            <div className="default-text">(Note1: data will also post your console log)</div>
+            <div className="default-text">
+              (Note2: blacklisted addresses are skipped, for now report scam addresses directly to
+              us)
+            </div>
+            <br></br>
+            <Input
+              placeholder="  target address..."
+              fontSize="small"
+              marginLeft="5px"
+              width="50hw"
+              m="5px"
+              value={input}
+              onInput={(e) => setInput((e.target as HTMLInputElement).value)}
+            />
+            <Button
+              bg="gray.700"
+              backgroundColor="#242527"
+              border="1px solid transparent"
+              _hover={{ border: "1px", borderStyle: "solid", backgroundColor: "gray.700" }}
+              borderRadius="6px"
+              m="5px"
+              px={3}
+              height="28px"
+              onClick={() => {
+                ReloadData(input, signer, Moralis);
+              }}
+            >
+              <Text color="white" fontSize="small">
+                Reload Data
+              </Text>
+            </Button>
+            <Text>Test Address0: 0x1C77905fEAfD85f7fdeD7aD5f871F93C2B11dcfF</Text>
+            <Text>Test Address1: 0x2ACE52107F0fA44af03e8b6bf75b8C2A72d69cff</Text>
+            <br></br>
+            <div>
+              Account Status: <div className="accountStatus">null</div>
+            </div>
+            <div>
+              Account Total Value: <div className="accountTotalValue">???</div>
+            </div>
+          </div>
+
           <Table {...getTableProps()}>
             <Thead>
               {headerGroups.map((headerGroup: any) => (
@@ -583,7 +663,13 @@ const Portfolio: FC = () => {
             </Tbody>
           </Table>
           <Center>
-            <Box width="15vh" background="black" hidden={true} id="isLoading">
+            <Box
+              width="15vh"
+              background="black"
+              hidden={true}
+              id="isLoading"
+              verticalAlign="center"
+            >
               <VStack spacing={10} aligh="center">
                 <Box animation={spinAnimation}>
                   <Image src={require("../asset/image/ApeLogo.png").default} boxSize="150px" />
@@ -595,8 +681,8 @@ const Portfolio: FC = () => {
               <GridLoader color="red" />
             </Box>
           </Center>
-        </PortfolioDefault>
-      </Box>
+        </Box>
+      </PortfolioDefault>
     </>
   );
 };
@@ -632,8 +718,21 @@ export default Portfolio;
 //  button to copy address
 //  something onscreen when nothing loads (wallet isnt connected)
 //  invalid address error(s)
+//  fix AccountModal resizing
 
 //  create contract
 //    tokens held buy address
 //    iterate through tokens
 //    return token data
+
+// scss for each @media (also need classNames):
+//  connectButton_Active
+//    flexBox
+//      ethBox
+//        ethText
+//      accountButton
+//        accountText
+//        StyledIdenticon (inside root/Identicon)
+//  connectButton_Inactive
+//  AccountModel (inside ./AccountModel)
+//  NavIcon (inside ./Sidebar)

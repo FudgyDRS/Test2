@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import { useBlockNumber } from "../providers/blockNumber/context";
 import { BigNumber } from "ethers";
 import { useEffect, useState } from "react";

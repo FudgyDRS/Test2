@@ -13,6 +13,133 @@
   }
 }
 
+.default-warning {
+  color: red;
+  font-size: x-small;
+}
+.default-text {
+  color: white;
+  font-size: x-small;
+}
+.navigation-bar {
+  background-color: #282c34;
+}
+.full-body {
+  width: 100hw;
+}
+.footer {
+  background-color: #282c34;
+  height: 5vh;
+}
+.css-0 {
+  color: #ffffff;
+  padding-left: 3px;
+  padding-right: 3px;
+  font-size: x-small;
+}
+
+// <----------- Components ----------->
+.connect-button {
+}
+
+.ethText {
+  font-size: 14pt;
+}
+.ethBox {
+  margin-inline: 20px;
+}
+.accountText {
+  font-size: 14pt;
+}
+.accountButton {
+  height: 42px;
+}
+.styledIdenticon {
+  height: 1rem;
+  width: 1rem;
+}
+.headerBar {
+  height: 60px;
+}
+
+//20px — 480px: Mobile devices.
+//481px — 768px: iPads, Tablets.
+//769px — 1024px: Small screens, laptops.
+//1025px — 1200px: Desktops, large screens.
+//1201px and more — Extra large screens, TV.
+@media (max-width: 1200px) {
+  .ethText {
+    font-size: 14pt;
+  }
+  .ethBox {
+    margin-inline: 20px;
+  }
+  .accountText {
+    font-size: 14pt;
+  }
+  .accountButton {
+    height: 42px;
+  }
+  .styledIdenticon {
+    height: 1rem;
+    width: 1rem;
+  }
+}
+@media (max-width: 1024px) {
+  .ethText {
+    font-size: 14pt;
+  }
+  .ethBox {
+    margin-inline: 20px;
+  }
+  .accountText {
+    font-size: 14pt;
+  }
+  .accountButton {
+    height: 38px;
+  }
+  .styledIdenticon {
+    height: 1rem;
+    width: 1rem;
+  }
+}
+@media (max-width: 768px) {
+  .ethText {
+    font-size: 12pt;
+  }
+  .ethBox {
+    margin-inline: 10px;
+  }
+  .accountText {
+    font-size: 12pt;
+  }
+  .accountButton {
+    height: 38px;
+  }
+  .styledIdenticon {
+    height: 0.75rem;
+    width: 0.75rem;
+  }
+}
+@media (max-width: 480px) {
+  .ethText {
+    font-size: 10pt;
+  }
+  .ethBox {
+    margin-inline: 2px;
+  }
+  .accountText {
+    font-size: 10pt;
+  }
+  .accountButton {
+    height: 20px;
+  }
+  .styledIdenticon {
+    height: 0.5rem;
+    width: 0.5rem;
+  }
+}
+
 .App-header {
   background-color: #282c34;
   min-height: 100vh;
@@ -36,13 +163,6 @@
   to {
     transform: rotate(360deg);
   }
-}
-
-.css-0 {
-  color: #bf1fe7;
-  background-color: #000000;
-  padding-left: 3px;
-  padding-right: 3px;
 }
 
 // Customize variables

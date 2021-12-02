@@ -1,43 +1,53 @@
-import React, { FC } from "react";
-import { Text, Button } from "@chakra-ui/react";
+import {
+  //React,
+  FC
+} from "react";
+import {
+  //Text,
+  Button
+} from "@chakra-ui/react";
 import styled from "styled-components";
 
-import { ethers } from "ethers";
-import { formatEther, parseUnits, formatUnits } from "@ethersproject/units";
-import { BigNumber, BigNumberish } from "@ethersproject/bignumber";
+//import { ethers } from "ethers";
+import {
+  formatEther,
+  //parseUnits,
+  formatUnits
+} from "@ethersproject/units";
+//import { BigNumber, BigNumberish } from "@ethersproject/bignumber";
 import { useEtherBalance, useTokenBalance, useEthers } from "../hooks";
 
 import { GetTotalDividendsDistributed } from "../abi/KittyCake";
 import {
   BalanceOf,
   MonstersOwned,
-  PowerupsOwned,
+  //PowerupsOwned,
   Train,
   Monsters,
-  TokenURI,
+  //TokenURI,
   GameOwner,
-  BaseURI,
-  CooldownBlocks,
-  CooledOFF,
+  //BaseURI,
+  //CooldownBlocks,
+  //CooledOFF,
   OwnerOf
 } from "../abi/BlockCreatures";
 
-import { MonsterObject } from "../models/MonsterObject";
+//import { MonsterObject } from "../models/MonsterObject";
 
 const BlockCreatures = styled.span`
   color: green;
 `;
 
-type MonsterObjectProps = {
-  monsterObject: MonsterObject;
-};
+//type MonsterObjectProps = {
+//  monsterObject: MonsterObject;
+//};
 
-const ListMonsters: FC<MonsterObjectProps> = ({ monsterObject }) => {
-  const [subnav, setSubnav] = React.useState(false);
-  const showSubnav = () => setSubnav(!subnav);
-
-  return <></>;
-};
+//const ListMonsters: FC<MonsterObjectProps> = ({ monsterObject }) => {
+//  const [subnav, setSubnav] = React.useState(false);
+//  const showSubnav = () => setSubnav(!subnav);
+//
+//  return <></>;
+//};
 
 const Overview: FC = () => {
   const { account } = useEthers();
@@ -50,8 +60,8 @@ const Overview: FC = () => {
   };
 
   // Network tokens
-  const tokenWBNB = "0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c";
-  const tokenBUSD = "0xe9e7cea3dedca5984780bafc599bd69add087d56";
+  //const tokenWBNB = "0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c";
+  //const tokenBUSD = "0xe9e7cea3dedca5984780bafc599bd69add087d56";
 
   // Test BSC Contracts
   //		MeowMoon
@@ -75,7 +85,7 @@ const Overview: FC = () => {
   // function monsters(uint256) public view returns(string rarity, uint256 level, uint256 cooldown, uint256 boost, uint256 code);
   const _id = "0x1F93";
   const balanceMoolah = BalanceOf(account);
-  const monsterAddresses = MonstersOwned(account);
+  //const monsterAddresses = MonstersOwned(account);
   //const monster0 = monsterAddresses == [] ? monsterAddresses[0] : ""; // needs to be made asynch
   //const testMonster = BaseURI();
   //const cooldownBlocks = CooledOFF(_id);

@@ -1,11 +1,22 @@
-import React, { FC } from "react";
-import { Text, Button } from "@chakra-ui/react";
-import styled from "styled-components";
+import {
+  //React,
+  FC
+} from "react";
+//import { Text, Button } from "@chakra-ui/react";
+//import styled from "styled-components";
 
-import { ethers } from "ethers";
-import { formatEther, parseUnits, formatUnits } from "@ethersproject/units";
-import { BigNumber, BigNumberish } from "@ethersproject/bignumber";
-import { useEtherBalance, useTokenBalance, useEthers } from "@usedapp/core";
+//import { ethers } from "ethers";
+import {
+  formatEther
+  //parseUnits,
+  //formatUnits
+} from "@ethersproject/units";
+//import { BigNumber, BigNumberish } from "@ethersproject/bignumber";
+import {
+  useEtherBalance,
+  //useTokenBalance,
+  useEthers
+} from "@usedapp/core";
 
 const Swap: FC = () => {
   const { account } = useEthers();

@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import { Interface } from "@ethersproject/abi";
 import { useMemo } from "react";
 import { Falsy } from "../model/types";

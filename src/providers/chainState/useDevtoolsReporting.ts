@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import { useEffect } from "react";
 import { useEthers } from "../../hooks";
 import { notifyDevtools } from "../devtools";

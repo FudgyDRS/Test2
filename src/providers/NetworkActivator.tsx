@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import { NetworkConnector } from "@web3-react/network-connector";
 import { useEffect } from "react";
 import { useEthers } from "../hooks";

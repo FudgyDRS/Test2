@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import { ReactNode, useEffect, useState } from "react";
 import { isLocalChain } from "../helpers";
 import { useEthers } from "../hooks";

@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import { ReactNode, useCallback, useEffect, useReducer } from "react";
 import { useEthers, useLocalStorage } from "../../hooks";
 import { useBlockNumber } from "../blockNumber/context";

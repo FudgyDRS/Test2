@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import { useContext, useEffect, useMemo } from "react";
 import { ChainCall } from "../providers/chainState/callsReducer";
 import { ChainStateContext } from "../providers/chainState/context";

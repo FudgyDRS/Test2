@@ -1,14 +1,17 @@
-import { Button, Box, Text } from "@chakra-ui/react";
-import { useEthers, useEtherBalance } from "@usedapp/core";
+//import { Button, Box, Text } from "@chakra-ui/react";
+//import { useEthers, useEtherBalance } from "@usedapp/core";
 import styled from "styled-components";
-import React, { FC, useState } from "react";
+import {
+  //React,
+  FC
+  //useState
+} from "react";
 
-type Props = {
-  handleReloadModal: any;
-};
+//type Props = {
+//handleReloadModal: any;
+//};
 
 const FooterDefault = styled.div`
-  background-color: #282c34;
   min-width: 100vw;
   display: flex;
   flex-direction: column;
@@ -25,7 +28,7 @@ const FooterDefault = styled.div`
 const Footer: FC = () => {
   return (
     <>
-      <FooterDefault>© 2021 Apefolio, Inc</FooterDefault>
+      <FooterDefault className="footer">© 2021 Apefolio, Inc</FooterDefault>
     </>
   );
 };

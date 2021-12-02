@@ -6,9 +6,9 @@ import Identicon from "../Identicon";
 //import { DAppProvider } from "@usedapp/core";
 //import { ChainId } from "@usedapp/core";
 
-import { DAppProvider } from "../providers";
-import { ChainId } from "../constants";
-import { NATIVE_CURRENCY } from "../constants";
+//import { DAppProvider } from "../providers";
+//import { ChainId } from "../constants";
+//import { NATIVE_CURRENCY } from "../constants";
 
 type Props = {
   handleOpenModal: any;
@@ -23,22 +23,23 @@ export default function ConnectButton({ handleOpenModal }: Props) {
   }
 
   return account ? (
-    <Box display="flex" alignItems="center" background="gray.700" borderRadius="xl" py="0">
-      <Box px="3">
-        <Text color="white" fontSize="md">
+    <Box display="flex" alignItems="center" background="gray.700" borderRadius="xl" py="0" mr="4">
+      <Box className="ethBox">
+        <Text className="ethText">
           {etherBalance && parseFloat(formatEther(etherBalance)).toFixed(3)}
-          {chainId == 4002
+          {chainId === 4002
             ? " tFTM"
-            : chainId == 250
+            : chainId === 250
             ? " FTM"
-            : chainId == 97
+            : chainId === 97
             ? " tBNB"
-            : chainId == 56
+            : chainId === 56
             ? " BNB"
             : " ETH"}
         </Text>
       </Box>
       <Button
+        className="accountButton"
         onClick={handleOpenModal}
         bg="gray.800"
         border="1px solid transparent"
@@ -51,9 +52,8 @@ export default function ConnectButton({ handleOpenModal }: Props) {
         borderRadius="xl"
         m="1px"
         px={3}
-        height="38px"
       >
-        <Text color="white" fontSize="md" fontWeight="medium" mr="2">
+        <Text className="accountText" color="white" fontWeight="medium" mr="2">
           {account &&
             `${account.slice(0, 6)}...${account.slice(account.length - 4, account.length)}`}
         </Text>

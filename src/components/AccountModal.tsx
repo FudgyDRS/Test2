@@ -16,12 +16,21 @@ import { ExternalLinkIcon, CopyIcon } from "@chakra-ui/icons";
 import { useEthers } from "@usedapp/core";
 import Identicon from "../Identicon";
 
+import {
+  //React,
+  useState
+} from "react";
+
+import CopyToClipboard from "react-copy-to-clipboard";
+
 type Props = {
   isOpen: any;
   onClose: any;
 };
 
 export default function AccountModal({ isOpen, onClose }: Props) {
+  const [value, setValue] = useState("");
+
   const { account, deactivate } = useEthers();
 
   // Add a function to handle deactivating account
@@ -93,19 +102,21 @@ export default function AccountModal({ isOpen, onClose }: Props) {
               </Text>
             </Flex>
             <Flex alignContent="center" m={3}>
-              <Button
-                variant="link"
-                color="gray.400"
-                fontWeight="normal"
-                fontSize="sm"
-                _hover={{
-                  textDecoration: "none",
-                  color: "whiteAlpha.800"
-                }}
-              >
-                <CopyIcon mr={1} />
-                Copy Address
-              </Button>
+              <CopyToClipboard text={`${account}`} onCopy={() => setValue(`${account}`)}>
+                <Button
+                  variant="link"
+                  color="gray.400"
+                  fontWeight="normal"
+                  fontSize="sm"
+                  _hover={{
+                    textDecoration: "none",
+                    color: "whiteAlpha.800"
+                  }}
+                >
+                  <CopyIcon mr={1} />
+                  Copy Address
+                </Button>
+              </CopyToClipboard>
               <Link
                 fontSize="sm"
                 display="flex"
